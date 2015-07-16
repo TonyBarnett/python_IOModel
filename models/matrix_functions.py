@@ -11,7 +11,7 @@ def get_col_sum(a: numpy.matrix) -> numpy.matrix:
 
 
 def element_wise_divide(a: numpy.matrix, b: numpy.matrix) -> numpy.matrix:
-    return numpy.divide(a, b)
+    return numpy.divide(numpy.array(a), numpy.array(b))
 
 
 def matrix_multiply(a: numpy.matrix, b: numpy.matrix) -> numpy.matrix:
@@ -20,3 +20,7 @@ def matrix_multiply(a: numpy.matrix, b: numpy.matrix) -> numpy.matrix:
 
 def matrix_divide(a: numpy.matrix, b: numpy.matrix) -> numpy.matrix:
     return matrix_multiply(a, inv(b))
+
+
+def diagonal(a: numpy.matrix) -> numpy.matrix:
+    return numpy.matrix(numpy.diag(a.A1))
