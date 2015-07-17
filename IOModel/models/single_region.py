@@ -1,6 +1,7 @@
 import numpy
 from numpy.linalg import inv
-from .matrix_functions import get_col_sum, get_row_sum, matrix_divide, matrix_multiply, element_wise_divide, diagonal
+
+from IOModel.matrix_functions import get_col_sum, get_row_sum, matrix_divide, matrix_multiply, element_wise_divide, diagonal
 
 
 #  TODO get UK Consumption, UK production, UK emissions and return some carbon intensities
