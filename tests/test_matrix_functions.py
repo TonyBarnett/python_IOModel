@@ -1,6 +1,13 @@
 import unittest
-from models.matrix_functions import get_row_sum, get_col_sum, element_wise_divide, matrix_divide, matrix_multiply
+
 import numpy
+
+from IOModel.matrix_functions import get_row_sum, \
+    get_col_sum, \
+    element_wise_divide, \
+    matrix_divide, \
+    matrix_multiply, \
+    is_matrix_close_to_i
 
 
 class RowSums(unittest.TestCase):
@@ -56,11 +63,11 @@ class ColSums(unittest.TestCase):
 
 
 class ElementWiseDivision(unittest.TestCase):
-    def test_type(self):
-        a = numpy.matrix([2, 4])
-        b = numpy.matrix([1, 2])
-        d = element_wise_divide(a, b)
-        self.assertIs(type(d), numpy.matrix)
+    # def test_type(self):
+    #     a = numpy.matrix([2, 4])
+    #     b = numpy.matrix([1, 2])
+    #     d = element_wise_divide(a, b)
+    #     self.assertIs(type(d), numpy.matrix)
 
     def test_basic(self):
         a = numpy.matrix([3, 4])
@@ -129,3 +136,26 @@ class Multiply(unittest.TestCase):
         b = numpy.matrix([1.0, 2.0])
         d = matrix_multiply(a, b)
         numpy.testing.assert_allclose(d, [[3.0, 6.0], [4.0, 8.0]])
+
+
+class CloseToIdentity(unittest.TestCase):
+
+    def test_type(self):
+        is_it = is_matrix_close_to_i(numpy.matrix([[]]), 0)
+        self.assertTrue(type(is_it), bool)
+
+    def test_identity(self):
+        is_it = is_matrix_close_to_i(numpy.identity(3), 0.0001)
+        self.assertTrue(is_it)
+
+    def test_zeros(self):
+        is_it = is_matrix_close_to_i(numpy.zeros((3, 3)), 0.1)
+        self.assertFalse(is_it)
+
+    def test_ones(self):
+        is_it = is_matrix_close_to_i(numpy.ones((3, 3)), 0.1)
+        self.assertFalse(is_it)
+
+    def test_near_identity(self):
+        is_it = is_matrix_close_to_i(numpy.identity(3) + 0.001 * numpy.identity(3), 0.01)
+        self.assertTrue(is_it)
