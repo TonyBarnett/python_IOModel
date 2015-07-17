@@ -28,8 +28,8 @@ def run_cras(row_totals: numpy.matrix,
     :return:
     """
 
-    a = numpy.ones(shape=(len(row_totals), len(column_totals)))
-    e = numpy.ones(shape=(1, len(row_totals)))
+    a = numpy.matrix(numpy.ones(shape=(len(row_totals), len(column_totals))))
+    e = numpy.matrix(numpy.ones(shape=(1, len(row_totals))))
     for _ in range(maximum_iterations):
 
         r_hat = row_scaling(a, row_totals, e)
