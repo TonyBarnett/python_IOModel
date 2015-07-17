@@ -29,7 +29,7 @@ def run_cras(row_totals: numpy.matrix,
     """
     # TODO remove this hack [max(thing.shape)]
     a = numpy.matrix(numpy.ones(shape=(max(row_totals.shape), max(column_totals.shape))))
-    e = numpy.matrix(numpy.ones(shape=(1, len(row_totals))))
+    e = numpy.matrix(numpy.ones(shape=(len(row_totals), 1)))
     for _ in range(maximum_iterations):
 
         r_hat = row_scaling(a, row_totals, e)
