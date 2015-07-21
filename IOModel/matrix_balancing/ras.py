@@ -36,8 +36,8 @@ def run_ras(row_totals: numpy.matrix,
     :return:
     """
     if not a:
-        a = numpy.matrix(numpy.ones(shape=(len(row_totals), len(column_totals))))
-    e = numpy.matrix(numpy.ones(shape=(1, len(row_totals))))
+        a = numpy.matrix(numpy.ones(shape=(row_totals.shape[0], column_totals.shape[1])))
+    e = numpy.matrix(numpy.ones(shape=row_totals.shape))
 
     for _ in range(maximum_iterations):
 
