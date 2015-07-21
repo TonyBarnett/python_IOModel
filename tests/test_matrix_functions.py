@@ -159,3 +159,7 @@ class CloseToIdentity(unittest.TestCase):
     def test_near_identity(self):
         is_it = is_matrix_close_to_i(numpy.identity(3) + 0.001 * numpy.identity(3), 0.01)
         self.assertTrue(is_it)
+
+    def test_negative_i(self):
+        is_it = is_matrix_close_to_i(numpy.identity(4) * -1, 0.00001)
+        self.assertFalse(is_it)
