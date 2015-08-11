@@ -5,10 +5,9 @@ from IOModel.matrix_functions import diagonal, matrix_divide, matrix_multiply, i
 
 def apply_conditions(a: numpy.matrix, conditions: dict) -> numpy.matrix:
     for cells, value in conditions.items():
-        total = value / len(cells)
+        # total = value / len(cells)
 
-        for cell in cells:
-            a.A1[cell] += total
+        a[cells] = value
 
     return a
 

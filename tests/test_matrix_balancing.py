@@ -1,6 +1,7 @@
 import unittest
 import numpy
 from IOModel.matrix_balancing.ras import row_scaling, column_scaling, run_ras
+from IOModel.matrix_balancing.cras import apply_conditions
 from IOModel.matrix_functions import get_row_sum, get_col_sum
 
 
@@ -77,3 +78,17 @@ class RAS(unittest.TestCase):
 
         self.assertTrue((get_row_sum(output) == self.row_sums).all())
         self.assertTrue((get_col_sum(output) == self.column_sums).all())
+
+
+class CRAS(unittest.TestCase):
+    def setUp(self):
+        self.matrix = numpy.matrix([[1, 2, 3],
+                                    [5, 7, 9],
+                                    [3, 2, 5]])
+
+        self.conditions = {(0, 0): 4, (0, 1): 5}
+
+    def test_simple_case(self):
+        m = apply_conditions(self.matrix, self.conditions)
+        self.assertEqual(m[(0, 0)], 4)
+        self.assertEqual(m[(0, 1)], 5)
