@@ -7,7 +7,7 @@ except ImportError:
 setup(
     name="IOModel",
     packages=["IOModel", "IOModel.models", "IOModel.matrix_balancing"],
-    version="0.1",
+    version="0.2",
     description="input-output model",
     long_description="input-output model, complete with matrix balancing",
     author="me",
