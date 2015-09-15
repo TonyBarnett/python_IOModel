@@ -1,7 +1,10 @@
 import numpy
 from numpy.linalg import inv
 
-from IOModel.matrix_functions import get_col_sum, get_row_sum, matrix_divide, matrix_multiply, element_wise_divide, diagonal
+from IOModel.matrix_functions import get_col_sum, get_row_sum, \
+    matrix_divide, matrix_multiply, \
+    element_wise_divide, \
+    diagonal
 
 
 #  TODO get UK Consumption, UK production, UK emissions and return some carbon intensities
@@ -10,7 +13,8 @@ from IOModel.matrix_functions import get_col_sum, get_row_sum, matrix_divide, ma
 #  y is row sum of U
 
 
-def run_model(consumption: numpy.matrix, production: numpy.matrix, emissions: numpy.matrix) -> numpy.matrix:
+def run_model(consumption: numpy.matrix, production: numpy.matrix,
+              emissions: numpy.matrix, final_demand: numpy.matrix=None) -> numpy.matrix:
     """
     :param consumption: U
     :param production: V
@@ -22,7 +26,10 @@ def run_model(consumption: numpy.matrix, production: numpy.matrix, emissions: nu
     q = get_row_sum(production.source_data.elements)
     g = get_col_sum(production.source_data.elements)
 
-    y = get_row_sum(consumption.source_data.elements)
+    if final_demand is None:
+        y = get_row_sum(consumption.source_data.elements)
+    else:
+        y = final_demand
 
     b = matrix_divide(consumption.source_data.elements, diagonal(g))
     d = matrix_divide(production.source_data.elements, diagonal(q))
